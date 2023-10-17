@@ -1,0 +1,287 @@
+/* create a content css for elements in content js injected */
+/* first element alq-overlay */
+
+#alq-overlay {
+  position: relative;
+  align-items: center;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #111115;
+  z-index: 9999;
+}
+
+#contentTable {
+  position: relative; 
+  transform: translateY(-50%);
+  text-align: center;
+  color: #fff;
+  font-size: 24px;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+body {
+margin: 0;
+padding: 0;
+font-family: Arial, sans-serif;
+display: flex;
+flex-direction: column;
+height: 100vh;
+}
+.left-bar #botsButton {
+  background-image: url('data:image/svg+xml;base64, PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KDTwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvLCB3d3cuc3ZncmVwby5jb20sIFRyYW5zZm9ybWVkIGJ5OiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4KPHN2ZyB3aWR0aD0iMTk2cHgiIGhlaWdodD0iMTk2cHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBzdHJva2U9IiNmZmZmZmYiPgoNPGcgaWQ9IlNWR1JlcG9fYmdDYXJyaWVyIiBzdHJva2Utd2lkdGg9IjAiLz4KDTxnIGlkPSJTVkdSZXBvX3RyYWNlckNhcnJpZXIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgoNPGcgaWQ9IlNWR1JlcG9faWNvbkNhcnJpZXIiPiA8cGF0aCBkPSJNOSAxNUM4LjQ0NzcxIDE1IDggMTUuNDQ3NyA4IDE2QzggMTYuNTUyMyA4LjQ0NzcxIDE3IDkgMTdDOS41NTIyOSAxNyAxMCAxNi41NTIzIDEwIDE2QzEwIDE1LjQ0NzcgOS41NTIyOSAxNSA5IDE1WiIgZmlsbD0iI2ZmZmZmZiIvPiA8cGF0aCBkPSJNMTQgMTZDMTQgMTUuNDQ3NyAxNC40NDc3IDE1IDE1IDE1QzE1LjU1MjMgMTUgMTYgMTUuNDQ3NyAxNiAxNkMxNiAxNi41NTIzIDE1LjU1MjMgMTcgMTUgMTdDMTQuNDQ3NyAxNyAxNCAxNi41NTIzIDE0IDE2WiIgZmlsbD0iI2ZmZmZmZiIvPiA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTEyIDFDMTAuODk1NCAxIDEwIDEuODk1NDMgMTAgM0MxMCAzLjc0MDI4IDEwLjQwMjIgNC4zODY2MyAxMSA0LjczMjQ0VjdINkM0LjM0MzE1IDcgMyA4LjM0MzE1IDMgMTBWMjBDMyAyMS42NTY5IDQuMzQzMTUgMjMgNiAyM0gxOEMxOS42NTY5IDIzIDIxIDIxLjY1NjkgMjEgMjBWMTBDMjEgOC4zNDMxNSAxOS42NTY5IDcgMTggN0gxM1Y0LjczMjQ0QzEzLjU5NzggNC4zODY2MyAxNCAzLjc0MDI4IDE0IDNDMTQgMS44OTU0MyAxMy4xMDQ2IDEgMTIgMVpNNSAxMEM1IDkuNDQ3NzIgNS40NDc3MiA5IDYgOUg3LjM4MTk3TDguODI5MTggMTEuODk0NEM5LjE2Nzk2IDEyLjU3MiA5Ljg2MDQ5IDEzIDEwLjYxOCAxM0gxMy4zODJDMTQuMTM5NSAxMyAxNC44MzIgMTIuNTcyIDE1LjE3MDggMTEuODk0NEwxNi42MTggOUgxOEMxOC41NTIzIDkgMTkgOS40NDc3MiAxOSAxMFYyMEMxOSAyMC41NTIzIDE4LjU1MjMgMjEgMTggMjFINkM1LjQ0NzcyIDIxIDUgMjAuNTUyMyA1IDIwVjEwWk0xMy4zODIgMTFMMTQuMzgyIDlIOS42MTgwM0wxMC42MTggMTFIMTMuMzgyWiIgZmlsbD0iI2ZmZmZmZiIvPiA8cGF0aCBkPSJNMSAxNEMwLjQ0NzcxNSAxNCAwIDE0LjQ0NzcgMCAxNVYxN0MwIDE3LjU1MjMgMC40NDc3MTUgMTggMSAxOEMxLjU1MjI4IDE4IDIgMTcuNTUyMyAyIDE3VjE1QzIgMTQuNDQ3NyAxLjU1MjI4IDE0IDEgMTRaIiBmaWxsPSIjZmZmZmZmIi8+IDxwYXRoIGQ9Ik0yMiAxNUMyMiAxNC40NDc3IDIyLjQ0NzcgMTQgMjMgMTRDMjMuNTUyMyAxNCAyNCAxNC40NDc3IDI0IDE1VjE3QzI0IDE3LjU1MjMgMjMuNTUyMyAxOCAyMyAxOEMyMi40NDc3IDE4IDIyIDE3LjU1MjMgMjIgMTdWMTVaIiBmaWxsPSIjZmZmZmZmIi8+IDwvZz4KDTwvc3ZnPg==');
+  background-repeat: no-repeat;
+  height: 60px;
+  background-size: 100%; /* Ajusta el tamaño del ícono según tus necesidades */
+  padding-left: 30px; /* Ajusta el espaciado entre el ícono y el texto */
+}
+
+/* Agrega el ícono al botón "config button" */
+.left-bar #configPage {
+  background-image: url('data:image/svg+xml;base64, PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KDTwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvLCB3d3cuc3ZncmVwby5jb20sIFRyYW5zZm9ybWVkIGJ5OiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBzdHJva2U9IiNmZmZmZmYiPgoNPGcgaWQ9IlNWR1JlcG9fYmdDYXJyaWVyIiBzdHJva2Utd2lkdGg9IjAiLz4KDTxnIGlkPSJTVkdSZXBvX3RyYWNlckNhcnJpZXIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgoNPGcgaWQ9IlNWR1JlcG9faWNvbkNhcnJpZXIiPiA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTMuNTk5MzggNi4yMjQxM0MzLjM2MiA0LjgyMDMzIDQuNjgwMDIgMy42NDYzOCA2LjA3MzA2IDQuMDIwODRMNy4xMjc3NyA0LjMwNDM1QzcuOTY0ODUgNC41MjkzNyA4Ljg1MzA1IDQuMTkwOTIgOS4zMTg4NyAzLjQ2OTQzTDEwLjMyOTggMS45MDM2OEMxMS4xMDc3IDAuNjk4Nzc1IDEyLjg5MjMgMC42OTg3NzMgMTMuNjcwMiAxLjkwMzY4TDE0LjY4MTEgMy40Njk0M0MxNS4xNDY5IDQuMTkwOTIgMTYuMDM1MSA0LjUyOTM3IDE2Ljg3MjIgNC4zMDQzNUwxNy45MjY5IDQuMDIwODRDMTkuMzIgMy42NDYzOCAyMC42MzggNC44MjAzMyAyMC40MDA2IDYuMjI0MTNMMjAuMTQwNSA3Ljc2MjY1QzIwLjAwNjggOC41NTMzNSAyMC4zNzczIDkuMzQ0MiAyMS4wNzQ3IDkuNzU2NjNMMjIuMDM4OCAxMC4zMjY4QzIzLjMyMDQgMTEuMDg0NyAyMy4zMjA0IDEyLjkxNTMgMjIuMDM4OCAxMy42NzMyTDIxLjA3NDcgMTQuMjQzNEMyMC4zNzczIDE0LjY1NTggMjAuMDA2OCAxNS40NDY3IDIwLjE0MDUgMTYuMjM3NEwyMC40MDA2IDE3Ljc3NTlDMjAuNjM4IDE5LjE3OTcgMTkuMzIgMjAuMzUzNiAxNy45MjY5IDE5Ljk3OTJMMTYuODcyMiAxOS42OTU3QzE2LjAzNTEgMTkuNDcwNiAxNS4xNDY5IDE5LjgwOTEgMTQuNjgxMSAyMC41MzA2TDEzLjY3MDIgMjIuMDk2M0MxMi44OTIzIDIzLjMwMTIgMTEuMTA3NyAyMy4zMDEyIDEwLjMyOTggMjIuMDk2M0w5LjMxODg3IDIwLjUzMDZDOC44NTMwNSAxOS44MDkxIDcuOTY0ODUgMTkuNDcwNiA3LjEyNzc3IDE5LjY5NTdMNi4wNzMwNiAxOS45NzkyQzQuNjgwMDIgMjAuMzUzNiAzLjM2MiAxOS4xNzk3IDMuNTk5MzggMTcuNzc1OUwzLjg1OTU0IDE2LjIzNzRDMy45OTMyNCAxNS40NDY3IDMuNjIyNzEgMTQuNjU1OCAyLjkyNTMxIDE0LjI0MzRMMS45NjExNiAxMy42NzMyQzAuNjc5NjEyIDEyLjkxNTMgMC42Nzk2MTQgMTEuMDg0NyAxLjk2MTE2IDEwLjMyNjhMMi45MjUzMSA5Ljc1NjYzQzMuNjIyNzEgOS4zNDQyIDMuOTkzMjQgOC41NTMzNSAzLjg1OTU0IDcuNzYyNjVMMy41OTkzOCA2LjIyNDEzWk05LjAzMDQyIDYuMTQ2MjFINi4wNjA4NVY5LjA3MzFMMy4wOTEyNyAxMkw2LjA2MDg1IDE0LjkyNjlWMTcuODUzOEg5LjAzMDQyTDEyIDIwLjc4MDdMMTQuOTY5NiAxNy44NTM4SDE3LjkzOTJWMTQuOTI2OUwyMC45MDg3IDEyTDE3LjkzOTIgOS4wNzMxVjYuMTQ2MjFIMTQuOTY5NkwxMiAzLjIxOTMxTDkuMDMwNDIgNi4xNDYyMVoiIGZpbGw9IiNmZmZmZmYiLz4gPHBhdGggZD0iTTE2LjQ1MTUgMTJDMTYuNDUxNSAxNC40MjQ3IDE0LjQ1NzIgMTYuMzkwMyAxMS45OTcxIDE2LjM5MDNDOS41MzcwNiAxNi4zOTAzIDcuNTQyNzcgMTQuNDI0NyA3LjU0Mjc3IDEyQzcuNTQyNzcgOS41NzUyOCA5LjUzNzA2IDcuNjA5NjUgMTEuOTk3MSA3LjYwOTY1QzE0LjQ1NzIgNy42MDk2NSAxNi40NTE1IDkuNTc1MjggMTYuNDUxNSAxMlpNOS41MTk2MyAxMkM5LjUxOTYzIDEzLjM0ODYgMTAuNjI4OCAxNC40NDE5IDExLjk5NzEgMTQuNDQxOUMxMy4zNjU0IDE0LjQ0MTkgMTQuNDc0NiAxMy4zNDg2IDE0LjQ3NDYgMTJDMTQuNDc0NiAxMC42NTE0IDEzLjM2NTQgOS41NTgxIDExLjk5NzEgOS41NTgxQzEwLjYyODggOS41NTgxIDkuNTE5NjMgMTAuNjUxNCA5LjUxOTYzIDEyWiIgZmlsbD0iI2ZmZmZmZiIvPiA8L2c+Cg08L3N2Zz4=');
+  background-repeat: no-repeat;
+  height: 60px;
+  background-size: 100%; /* Ajusta el tamaño del ícono según tus necesidades */
+  padding-left: 30px; /* Ajusta el espaciado entre el ícono y el texto */
+}
+
+.top-bar {
+height: 20px;
+background-color: #333;
+display: flex;
+align-items: center;
+justify-content: space-between; /* Alinea el contenido a la izquierda y a la derecha */
+padding: 0 20px;
+box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.top-bar #login { /* Cambia el id a "login" */
+margin-left: auto; /* Mueve el botón "Username" a la derecha */
+color: #fff;
+}
+.content-container {
+height: 100%;
+flex: 1;
+display: flex;
+background-color: #111;
+color: #fff; /* Cambia el color del texto a blanco en el centro */
+padding-bottom: 1%;
+}
+
+.left-bar {
+width: 60px;
+background-color: #444;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+}
+
+.content-window {
+flex: 1;
+padding: 5px;
+}
+
+.top-bar-button {
+background-color: transparent;
+border: none;
+color: #fff;
+cursor: pointer;
+font-size: 16px;
+}
+
+.top-bar-button:hover {
+background-color: #555;
+}
+
+.left-bar button {
+background-color: #555;
+border: none;
+color: #fff;
+padding: 10px;
+cursor: pointer;
+font-size: 16px;
+width: 100%;
+}
+
+.left-bar button:hover {
+background-color: #777;
+}
+.bot-grid {
+display: grid;
+place-items: center;
+grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+grid-template-rows: repeat(2, 1fr); /* Dos filas */
+gap: 20px; /* Espacio entre tarjetas */
+height: 100%; /* La mitad de la altura del viewport */
+}
+
+.card {
+position: relative;
+width: 98%; /* El 100% del espacio de su celda en el grid */
+height: 75%; /* El 100% del espacio de su celda en el grid */
+color: #fff;
+transition: 0.5s;
+cursor: pointer;
+display: flex;
+place-items: center;
+place-content: center;
+background: linear-gradient(45deg, #09ac3d, #ff3700db);
+border-radius: 1.2em;
+overflow: hidden;
+}
+
+
+@keyframes rotation_481 {
+0% {
+  transform: rotateZ(0deg);
+}
+
+0% {
+  transform: rotateZ(360deg);
+}
+}
+
+.card:hover {
+transform: translateY(-14px);
+}
+
+.card span {
+position: absolute;
+top: 6px;
+left: 6px;
+right: 6px;
+bottom: 6px;
+background-color: rgba(0, 0, 0, 0.6);
+z-index: 2;
+border-radius: 1em;
+}
+
+.card span::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 50%;
+height: 100%;
+background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card .bot-grid {
+position: relative;
+padding: 10px;
+z-index: 10;
+width: 100%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 800;
+font-size: 1.5em;
+}
+.addBot {
+display: flex;
+place-content: center;
+place-items: center;
+}
+
+
+.content-window {
+display : grid;
+}
+.header-text {
+position: relative;
+}
+.config-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}  
+
+.config-options {
+width: 15%;
+border-right: 1px solid #ccc;
+}
+.list-config {
+margin-top: 10px;
+}
+.input-card {
+width: 100%;
+padding: 5 5px;
+text-align: center;
+display: flex;
+align-items: flex-start;
+justify-content: space-around;
+flex-direction: row;
+gap: 12px;
+background: #fff;
+border-radius: 20px;
+}
+
+.input-card__title {
+font-size: 23px;
+font-weight: 900;
+color: #333;
+}
+
+.input-card__content {
+font-size: 13px;
+line-height: 18px;
+color: #333;
+}
+
+.input-card__form {
+display: flex;
+flex-direction: row;
+gap: 10px;
+}
+
+.input-card__form input {
+margin-top: 5px;
+outline: 0;
+font-size: large;
+background: rgb(255, 255, 255);
+box-shadow: transparent 0px 0px 0px 1px inset;
+padding: 0.6em;
+border-radius: 14px;
+border: 0px solid #333;
+color: black;
+}
+
+.input-card__form button {
+border: 0;
+background: #111;
+color: #fff;
+padding: 0.68em;
+border-radius: 14px;
+font-weight: bold;
+}
+
+.sign-up:hover {
+opacity: 0.8;
+}
+
+.closeButtonContainer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+}
+
+.closeCard {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.closeCard:hover {
+  color: red; /* Cambia el color de la "x" en el hover */
+}

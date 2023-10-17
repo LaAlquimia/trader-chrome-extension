@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "TraderTools La Alquimia",
+  "description": "Tools for Futures traders",
+  "version": "0.1.0",
+  "host_permissions": ["https://*.bybit.com/trade/usdt/*"],
+  "minimum_chrome_version": "116",
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "debugger",
+    "scripting"
+  ],
+  "action": {
+    "default_title": "La Alquimia Tools",
+    "default_popup": "home.html",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "service_worker": "background.js" , 
+    "type":"module"},
+  "content_scripts": [
+    {
+      "matches": ["https://www.bybit.com/trade/usdt/*"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ]
+}
