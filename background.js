@@ -67,6 +67,7 @@ export default async function getWebSocket () {
   ws.onmessage = (event) => {
     (async () => {
       const data = JSON.parse(event.data)
+      console.log(data)
       const bots = await new Promise((resolve) => {
         chrome.storage.local.get(['bots'], (bots) => {
           resolve(bots.bots)
