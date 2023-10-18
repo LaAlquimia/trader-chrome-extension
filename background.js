@@ -24,11 +24,38 @@ function compareAndSetTPSL (messages) {
   }
 }
 
+function messageFunc (event) {
+  (async () => {
+    const data = JSON.parse(event.data)
+    console.log(data)
+    const bots = await new Promise((resolve) => {
+      chrome.storage.local.get(['bots'], (bots) => {
+        resolve(bots.bots)
+      })
+    })
+    if (data.data) {
+      data.data.forEach(element => {
+        if (element.symbol) {
+          const matchingBot = bots.find((bot) => bot.coin + 'USDT' === element.symbol)
+          if (matchingBot) {
+            // Realiza una acción basada en la verificación
+            console.log('Bot running:', matchingBot)
+            const position = handlePosition(data, tp, sl)
+            console.log('position', position)
+            const com = compareAndSetTPSL(position)
+          }
+        }
+      })
+    }
+  })()
+}
+
 function setTPSL (message) {
   chrome.storage.local.get(['apikey', 'apisecret', 'bots'], function (result) {
     const { apikey, apisecret, bots } = result
     const isSymbolInBots = bots.some(bot => bot.coin + 'USDT' === message.symbol)
     if (isSymbolInBots) {
+      console.log( message.sl, message.tp, message.positionIdx, message.symbol)
       sltphttpcall(apikey, apisecret, message.sl, message.tp, message.positionIdx, message.symbol)
     }
   })
@@ -65,33 +92,7 @@ export default async function getWebSocket () {
   }
 
   ws.onmessage = (event) => {
-    (async () => {
-      const data = JSON.parse(event.data)
-      console.log(data)
-      const bots = await new Promise((resolve) => {
-        chrome.storage.local.get(['bots'], (bots) => {
-          resolve(bots.bots)
-        })
-      })
-      if (data.data) {
-        data.data.forEach(element => {
-          if (element.symbol) {
-            console.log(bots)
-            const matchingBot = bots.find((bot) => bot.coin + 'USDT' === element.symbol)
-            if (matchingBot) {
-              // Realiza una acción basada en la verificación
-              console.log('Se encontró un bot con el mismo símbolo:', matchingBot)
-
-              const position = handlePosition(data, tp, sl)
-              const com = compareAndSetTPSL(position)
-              // Puedes acceder a 'matchingBot.tp' y 'matchingBot.sl' si es necesario
-              // Realiza las acciones deseadas aquí
-            }
-            // Do something with the element that has a symbol property
-          }
-        })
-      }
-    })()
+    messageFunc(event)
   }
 
   ws.onclose = (event) => {

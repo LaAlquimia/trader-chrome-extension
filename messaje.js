@@ -11,9 +11,11 @@ export default  function handlePosition (message, expoLong, expoShort, config) {
       const d = decim(parsedEntryPrice)
       let sl = 0
       let tp = 0
+      if ( size ===0 ) {
+        console.log('posicion 0')
+      }
 
       if (positionIdx === 1 || positionIdx === 2) {
-        if (size > 0) {
           if (positionIdx === 1) {
             sl = Number((parsedEntryPrice - (expoShort / size)).toFixed(d))
             tp = Number((parsedEntryPrice + (expoLong / size)).toFixed(d))
@@ -21,11 +23,16 @@ export default  function handlePosition (message, expoLong, expoShort, config) {
             sl = Number((parsedEntryPrice + (expoShort / size)).toFixed(d))
             tp = Number((parsedEntryPrice - (expoLong / size)).toFixed(d))
           }
-        } else {
-          //retorno de posicion vacia 
-          return null
+      } else if (positionIdx === 0 ){
+        if (side === 'Buy') {
+          sl = Number((parsedEntryPrice - (expoShort / size)).toFixed(d))
+          tp = Number((parsedEntryPrice + (expoLong / size)).toFixed(d))
+        }else {
+          sl = Number((parsedEntryPrice + (expoShort / size)).toFixed(d))
+          tp = Number((parsedEntryPrice - (expoLong / size)).toFixed(d))
         }
-      } else {
+      } 
+      else {
         throw new Error('Invalid side value: ' + side)
       }
 

@@ -53,11 +53,11 @@ export default async function makeAPICall (apiKey, apiSecret, sl, tp, posIdx, sy
       requestOptions.body = data
     }
 
-    console.log(' SL....')
 
     try {
       const response = await fetch(fullendpoint, requestOptions)
       const responseData = await response.json()
+      console.log(fullendpoint, responseData)
       return responseData
     } catch (error) {
       console.log(error)
