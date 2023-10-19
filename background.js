@@ -1,21 +1,46 @@
-import { serverUrl, sl, tp } from './consts/consts.js'
-import handlePosition from './messaje.js'
+import { serverUrl } from './consts/consts.js'
+import handlePosition from './message.js'
 import sltphttpcall from './setsltp.js'
-chrome.storage.onChanged.addListener((changes, namespace) => {
-  for (const [key, { oldValue, newValue }] of Object.entries(changes)) {
-    console.log(
-      `Storage key "${key}" in namespace "${namespace}" changed.`,
-      `Old value was "${oldValue}", new value is "${newValue}".`
-    )
+import bybitPositions from './positions.js'
 
-    if ((key === 'apikey' || key === 'apisecret') && namespace === 'local') {
+async function onChangedStorage () {
+  const result = await new Promise((resolve) => {
+    chrome.storage.local.get(['apikey', 'apisecret'], (data) => {
+      resolve(data)
+    })
+  })
+  const apikey = result.apikey
+  const apisecret = result.apisecret
+  chrome.storage.onChanged.addListener((changes, namespace) => {
+    for (const [key, { oldValue, newValue }] of Object.entries(changes)) {
+      console.log(
+        `Storage key "${key}" in namespace "${namespace}" changed.`,
+        `Old value was "${JSON.stringify(oldValue)}", new value is "${JSON.stringify(newValue)}".`
+      )
+      if ((key === 'bots') && oldValue.length < newValue.length) {
+        (async () => {
+          const symbol = newValue[newValue.length - 1].coin
+          const tp = newValue[newValue.length - 1].tp
+          const sl = newValue[newValue.length - 1].sl
+          console.log(symbol)
+          const positions = await bybitPositions(apikey, apisecret, symbol)
+          const vpos = await handlePosition(positions, tp, sl)
+          console.log(JSON.parse(vpos))
+          const rs = JSON.parse(vpos).map((data) => {
+            if (data.size > 0) {
+              const call = sltphttpcall(apikey, apisecret, data.sl, data.tp, data.positionIdx, data.symbol)
+              return (call)
+            }
+          })
+        })()
+      } else if ((key === 'apikey' || key === 'apisecret') && namespace === 'local') {
       // Aquí puedes agregar la lógica para manejar los cambios en la API key o el API secret
-
-      console.log('Se han actualizado los datos de la API')
-      chrome.runtime.reload()
+        console.log('Se han actualizado los datos de la API')
+        chrome.runtime.reload()
+      }
     }
-  }
-})
+  })
+}
 function compareAndSetTPSL (messages) {
   for (const message of JSON.parse(messages)) {
     if (message.tp !== message.takeProfit || message.sl !== message.stopLoss) {
@@ -37,12 +62,13 @@ function messageFunc (event) {
       data.data.forEach(element => {
         if (element.symbol) {
           const matchingBot = bots.find((bot) => bot.coin + 'USDT' === element.symbol)
-          if (matchingBot) {
+          if (matchingBot && data.data?.length) {
             // Realiza una acción basada en la verificación
             console.log('Bot running:', matchingBot)
-            const position = handlePosition(data, tp, sl)
-            console.log('position', position)
-            const com = compareAndSetTPSL(position)
+            const fixPosition = handlePosition(data.data, matchingBot.tp, matchingBot.sl)
+            console.log('position', fixPosition)
+            const com = compareAndSetTPSL(fixPosition)
+            console.log(com)
           }
         }
       })
@@ -55,7 +81,7 @@ function setTPSL (message) {
     const { apikey, apisecret, bots } = result
     const isSymbolInBots = bots.some(bot => bot.coin + 'USDT' === message.symbol)
     if (isSymbolInBots) {
-      console.log( message.sl, message.tp, message.positionIdx, message.symbol)
+      console.log(message.sl, message.tp, message.positionIdx, message.symbol)
       sltphttpcall(apikey, apisecret, message.sl, message.tp, message.positionIdx, message.symbol)
     }
   })
@@ -144,5 +170,9 @@ function keepAlive (ws) {
     }
   }, 20 * 1000)
 }
-const ws = getWebSocket()
-const wss = [ws]
+
+(async () => {
+  onChangedStorage()
+  const ws = getWebSocket()
+  console.log(ws)
+})()

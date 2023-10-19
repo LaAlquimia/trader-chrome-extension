@@ -123,58 +123,10 @@ gap: 20px; /* Espacio entre tarjetas */
 height: 100%; /* La mitad de la altura del viewport */
 }
 
-.card {
-position: relative;
-width: 98%; /* El 100% del espacio de su celda en el grid */
-height: 75%; /* El 100% del espacio de su celda en el grid */
-color: #fff;
-transition: 0.5s;
-cursor: pointer;
-display: flex;
-place-items: center;
-place-content: center;
-background: linear-gradient(45deg, #09ac3d, #ff3700db);
-border-radius: 1.2em;
-overflow: hidden;
-}
 
 
-@keyframes rotation_481 {
-0% {
-  transform: rotateZ(0deg);
-}
 
-0% {
-  transform: rotateZ(360deg);
-}
-}
-
-.card:hover {
-transform: translateY(-14px);
-}
-
-.card span {
-position: absolute;
-top: 6px;
-left: 6px;
-right: 6px;
-bottom: 6px;
-background-color: rgba(0, 0, 0, 0.6);
-z-index: 2;
-border-radius: 1em;
-}
-
-.card span::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 50%;
-height: 100%;
-background-color: rgba(255, 255, 255, 0.1);
-}
-
-.card .bot-grid {
+.myCard .bot-grid {
 position: relative;
 padding: 10px;
 z-index: 10;
@@ -186,12 +138,6 @@ justify-content: center;
 font-weight: 800;
 font-size: 1.5em;
 }
-.addBot {
-display: flex;
-place-content: center;
-place-items: center;
-}
-
 
 .content-window {
 display : grid;
@@ -284,4 +230,119 @@ opacity: 0.8;
 
 .closeCard:hover {
   color: red; /* Cambia el color de la "x" en el hover */
+}
+
+
+/* css for card */
+
+
+.myCard {
+  background-color: transparent;
+  width: 190px;
+  height: 254px;
+  perspective: 1000px;
+}
+
+.titleCard {
+  font-size: 1.5em;
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+}
+
+.innerCard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.myCard:hover .innerCard {
+  transform: rotateY(180deg);
+}
+
+.frontSide,
+.backSide {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+  color: white;
+  box-shadow: 0 0 0.3em rgba(255, 255, 255, 0.5);
+  font-weight: 700;
+}
+
+.frontSide,
+.frontSide::before {
+  background: linear-gradient(43deg, rgb(183, 28, 64) 0%, rgb(17, 136, 44) 46%, rgb(176, 120, 17) 100%);
+}
+
+.backSide,
+.backSide::before {
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+}
+
+.backSide {
+  transform: rotateY(180deg);
+}
+
+.frontSide::before,
+.backSide::before {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: '';
+  width: 110%;
+  height: 110%;
+  position: absolute;
+  z-index: -1;
+  border-radius: 1em;
+  filter: blur(20px);
+  animation: animate 5s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0.3;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}
+
+#slInput, #tpInput{
+  width: 35%;
+  background: transparent; /* Hacer el fondo transparente */
+  border: none; /* Eliminar el borde */
+  font-weight: bold; /* Establecer el peso de la fuente a negrita */
+  font-size: 1.5em; /* Establecer el tamaño de la fuente más grande */
+  outline: none; /* Eliminar el outline */
+}
+
+#addBotButton{
+  width: 50%;
+  height: 20%;
+  border: none;
+  background: #08762d94;
+  margin-bottom: 10px;  
+  border-radius: 10px; 
+}
+
+#addBotButton:hover{
+  opacity: 0.8;
 }

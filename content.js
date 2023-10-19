@@ -7,42 +7,56 @@ ui.innerHTML = `
 
 <div class="content-container">
 <div class="left-bar">
-  <button id="botsButton"></button>
-  <button id="configPage"></button>
+    <button id="botsButton"></button>
+    <button id="configPage"></button>
 </div>
 
 <div class="content-window" id="mainContent">
-  <div class="bot-grid" id="botsContent">
-    <div class="card addBot" id="addBot">
-      <span class="addBot"><div class="addBot back-card">Add Bot</div></span>
+    <div class="bot-grid" id="botsContent">
+    <div class="myCard" id="addBot">
+    <div class="innerCard">
+        <div class="frontSide">
+            <h2 class="titleCard">LA ALQUIMIA</h2>
+            <p>SL TP BOT 🐢</p>
+        </div>
+        <div class="backSide">
+            <p class="titleCard">Add BOT</p>
+            <h3>Stop LOSS in 💲</h3>
+            <input type="number" min="0" id="slInput" placeholder="SL" value="1">
+            <h3>Take PROFIT in 💲</h3>
+            <!-- Campo de entrada numérico para SL con valor predeterminado "1" -->
+            <input type="number" min="0" id="tpInput" placeholder="TP" value="1">
+            <!-- Campo de entrada numérico para TP con valor predeterminado "1" -->
+            <button class="addBot" id = "addBotButton">Addbot</button>
+        </div>
     </div>
-  </div>
-  
-  <div class="config-grid" id="configContent" style="display: none;">
+</div>
 
-      <div class="input-card">
-      <span class="input-card__title">Api Keys</span>
-      <div class="input-card__form">
-        <select id="exchange_input" >
-        <option value="bybit">Bybit</option>
-        <option value="binance">Binance On Next version</option>
-      </select>
-          <input placeholder="Api Key here" type="text" id ="apikey_input">
-          <input placeholder="Api secret here" type="password" id ="apisecret_input">
-          <button class="sign-up" id ="setApis"> Save</button>
-      </div>
-      </div>
+    </div>
+
+    <div class="config-grid" id="configContent" style="display: none;">
+        <div class="input-card">
+            <span class="input-card__title">Api Keys</span>
+            <div class="input-card__form">
+                <select id="exchange_input">
+                    <option value="bybit">Bybit</option>
+                    <option value="binance">Binance On Next version</option>
+                </select>
+                <input placeholder="Api Key here" type="text" id="apikey_input">
+                <input placeholder="Api secret here" type="password" id="apisecret_input">
+                <button class="sign-up" id="setApis"> Save</button>
+            </div>
+        </div>
     </div>
 </div>
 </div>
 `
-
+function setBotSlTp (symbol) {
+  console.log('addbot verify sl and tp')
+}
 const apikeyInput = document.createElement('apikeyInput')
 apikeyInput.innerHTML = ''
 
-chrome.storage.local.get(['slValue']).then((result) => {
-  console.log('Value currently is ' + result.slValue)
-})
 function showOverlayMessage (message) {
   const overlay = document.getElementById('alq-overlay')
   const content = document.getElementById('mainContent')
@@ -141,17 +155,32 @@ function showOverlayMessage (message) {
       // Recorre los bots y crea una tarjeta para cada uno
       bots.forEach((bot, index) => {
         const card = document.createElement('div')
-        card.classList.add('card') // Agrega las clases CSS necesarias
+        card.classList.add('myCard') // Agrega las clases CSS necesarias
 
         // Agrega el contenido de la tarjeta con la información del bot
         card.innerHTML = `
-            <h2>Bot ${index + 1}</h2>
-            <p>Moneda: ${bot.coin}</p>
-            <div class="closeButtonContainer">
-        <button id="close_card" class="closeCard">x</button>
-    </div>
-          </div>
+        <div class="innerCard">
+      <div class="frontSide">
+          <h2 class="titleCard">${bot.coin}</h2>
+          <p>Bot Running</p>
+      </div>
+      <div class="backSide">
+          <h2 class="titleCard">${bot.coin}</h2>
+          <p>SL ${bot.sl} 💲</p>
+          <p>TP ${bot.tp} 💲</p>
+          <div class="closeButtonContainer">
+            <button id="close_card" class="closeCard">x</button>
+            </div>
+      </div>
+  </div>
         `
+        //         <h2></h2>
+        //         <p>Moneda: ${bot.coin}</p>
+        //         <div class="closeButtonContainer">
+        //     <button id="close_card" class="closeCard">x</button>
+        // </div>
+        //       </div>
+        //     `
 
         // Agrega un identificador único a cada tarjeta (opcional)
         card.id = `card${bot.coin}`
@@ -169,7 +198,7 @@ function showOverlayMessage (message) {
       apikeyInput.value = apikey
       apisecretInput.value = apisecret
     })
-    function addCard () {
+    function addBotSetsl () {
       const card = document.createElement('div')
       const cardsContainer = document.getElementById('botsContent')
       card.className = 'card'
@@ -178,7 +207,9 @@ function showOverlayMessage (message) {
       // Agregar el icono de "x" a la tarjeta
       // Agregar la tarjeta al contenedor
       const coin = document.URL.split('.bybit.com/trade/usdt/')[1].split('USDT')[0]
-
+      const tp = document.getElementById('tpInput').value
+      const sl = document.getElementById('slInput').value
+      const config = 'TPSL'
       chrome.storage.local.get({ bots: [] }, function (result) {
         const bots = result.bots
         console.log(`Estos son los bots existentes: ${JSON.stringify(bots)}`)
@@ -186,21 +217,30 @@ function showOverlayMessage (message) {
         // Verificar si la moneda ya está en la lista
         if (!bots.some(bot => bot.coin === coin) && lenBots < 6) {
           // Si no existe, agregar el nuevo bot a la lista
-          bots.push({ coin })
+          bots.push({ coin, config, tp, sl })
 
           // Actualizar los datos en el almacenamiento local
           chrome.storage.local.set({ bots }, function () {
             // Esto se ejecutará después de guardar los datos
+            card.classList.add('myCard')
             card.id = `card${coin}`
-            card.innerHTML = `
-            <h2>Bot ${coin}</h2>
-            <p>Moneda: ${coin}</p>
-            <div class="closeButtonContainer">
-        <button id="close_card" class="closeCard">x</button>
-    </div>
-          </div>
-`
+            card.innerHTML = `<div class="innerCard">
+            <div class="frontSide">
+                <p class="titleCard">${coin}</p>
+                <p>BOT ON</p>
+            </div>
+            <div class="backSide">
+                <p class="titleCard">${coin}</p>
+                <p>SL ${sl} 💲</p>
+                <p>TP ${tp} 💲</p>
+                <div class="closeButtonContainer">
+            <button id="close_card" class="closeCard">x</button>
+            </div>
+                
+            </div>
+            </div>`
             cardsContainer.insertBefore(card, addBotCard)
+            setBotSlTp(coin)
             // Si alcanzamos 6 tarjetas, eliminamos la capacidad de hacer clic
             console.log(`BOT ${coin} ha sido agregado a la lista de bots.`)
           })
@@ -211,12 +251,12 @@ function showOverlayMessage (message) {
     }
     document.addEventListener('click', (e) => {
       if (e.target.className === 'addBot') {
-        addCard()
+        addBotSetsl()
       } else if (e.target.id === 'botsButton') {
         botsContent.style.display = 'grid'
         configContent.style.display = 'none'
       } else if (e.target.id === 'close_card') {
-        const card = e.target.parentNode.parentNode
+        const card = e.target.parentElement.parentElement.parentElement.parentElement
         const cardcoin = card.id.split('card')[1]
 
         chrome.storage.local.get({ bots: [] }, function (result) {
@@ -247,6 +287,7 @@ function showOverlayMessage (message) {
         const apisecret = document.getElementById('apisecret_input').value
         chrome.storage.local.set({ apikey, apisecret }).then(() => {
           alert('Se han actualizado los datos de la API')
+          window.location.reload()
         })
       }
     })

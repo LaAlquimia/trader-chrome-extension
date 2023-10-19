@@ -53,7 +53,6 @@ export default async function makeAPICall (apiKey, apiSecret, sl, tp, posIdx, sy
       requestOptions.body = data
     }
 
-
     try {
       const response = await fetch(fullendpoint, requestOptions)
       const responseData = await response.json()
@@ -83,10 +82,6 @@ export default async function makeAPICall (apiKey, apiSecret, sl, tp, posIdx, sy
   await httpRequest(endpoint, 'POST', data, 'Cancel')
 }
 
-// Ahora puedes llamar a esta función desde tu archivo background.js
-// Pasando los valores necesarios como argumentos
-
-// Ejemplo de llamada desde background.js:
 // const sl = '0.2'
 // const tp = '1'
 // const symbol = 'XRPUSDT'
