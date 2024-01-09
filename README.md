@@ -9,6 +9,7 @@ The Trader Chrome Extension is a powerful tool for traders that enables automati
 To install the extension, follow these steps:
 
 1. 📦 Download the extension package (ZIP) and unzip them.
+
 ![image](https://github.com/LaAlquimia/trader-chrome-extension/assets/38500708/4fe22111-f1ae-49fb-8931-4daace616a0c)
 
 2. 🌐 Open Google Chrome.
@@ -29,6 +30,9 @@ To install the extension, follow these steps:
 ![image](https://github.com/LaAlquimia/trader-chrome-extension/assets/38500708/7f193025-58a5-479c-90d0-2d1a7983a1fa)
 
 2. 🛠️ Configure your trading settings, including your API key, API secret, stop loss, take profit, and other preferences.
+
+![image](https://github.com/LaAlquimia/trader-chrome-extension/assets/38500708/32c829e0-a7b0-4fd4-8848-dc2b0d5e748c)
+
 ![image](https://github.com/LaAlquimia/trader-chrome-extension/assets/38500708/353da17e-c5f1-46c6-84f4-0b635f5255f2)
 
 3. The extension will continuously watch your trading positions and trigger actions based on your configured SL and TP settings.
