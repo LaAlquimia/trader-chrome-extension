@@ -41,8 +41,10 @@ ui.innerHTML = `
                 <select id="exchange_input">
                     <option value="bybit">Bybit</option>
                     <option value="binance">Binance On Next version</option>
-                </select>
+                </select>                
+                <span class="apikey_span">Api Key</span>
                 <input placeholder="Api Key here" type="text" id="apikey_input">
+                <span class="apikey_span">Api Secret </span>
                 <input placeholder="Api secret here" type="password" id="apisecret_input">
                 <button class="sign-up" id="setApis"> Save</button>
             </div>

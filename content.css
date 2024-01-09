@@ -185,10 +185,14 @@ color: #333;
 
 .input-card__form {
 display: flex;
-flex-direction: row;
+flex-direction: column;
 gap: 10px;
 }
 
+.apikey_span {
+  font-weight: bold;
+  color: black;
+}
 .input-card__form input {
 margin-top: 5px;
 outline: 0;
